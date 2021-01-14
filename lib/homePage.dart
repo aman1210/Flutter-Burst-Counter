@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   burstParticle() {
-    if (particles.length > 200) {
+    if (particles.length > 100) {
       particles.removeRange(0, 75);
     }
     counterText['count'] += 1;
@@ -126,6 +126,8 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: counterText['color'],
       ),
       body: Container(
+        padding: const EdgeInsets.all(0),
+        margin: const EdgeInsets.only(bottom: 4),
         key: _boxKey,
         child: Stack(
           children: [
