@@ -18,6 +18,17 @@ class _HomePageState extends State<HomePage> {
 
   dynamic counterText = {"count": 1, "color": Color(0xffEF767A)};
 
+  Rect boxSize = Rect.zero;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Size size = _boxKey.currentContext.size;
+      boxSize = Rect.fromLTRB(0, 0, size.width, size.height);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,6 +36,28 @@ class _HomePageState extends State<HomePage> {
         title: Text('Burst Counter'),
         centerTitle: true,
         backgroundColor: counterText['color'],
+      ),
+      body: Container(
+        key: _boxKey,
+        child: Stack(
+          children: [
+            Center(
+              child: Text(
+                '${counterText['count']}',
+                style: TextStyle(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                  color: counterText['color'],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        backgroundColor: counterText['color'],
+        onPressed: () {},
       ),
     );
   }
